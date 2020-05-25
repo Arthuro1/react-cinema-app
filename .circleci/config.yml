@@ -61,6 +61,19 @@ jobs:
           name: Run linting
           command: npm run lint
 
+  linting:
+      executor: app-executor
+      steps:
+        - checkout
+        - *show-current-branch-name
+        - *restore-cache
+        - run:
+            name: Run linting
+            command: |
+              npm run lint
+              npm run prettier:check
+              npm run prettier:write
+              
   deploy-to-aws-s3:
     executor: app-executor
     steps:
