@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import './Header.scss'
-import logo from '../../assets/logo.svg'
+import './Header.scss';
+import logo from '../../assets/logo.svg';
 
 const HEADER_LIST = [
   {
@@ -31,29 +31,28 @@ const HEADER_LIST = [
 ];
 
 const Header = () => {
+  let [navClass, setNavClass] = useState(false);
+  let [menuClass, setMenuClass] = useState(false);
 
-    let [navClass, setNavClass] = useState(false)
-    let [menuClass, setMenuClass] = useState(false)
-
-    const toggleMenu = () => {
-        menuClass = !menuClass;
-        navClass = !navClass;
-        setNavClass(navClass);
-        setMenuClass(menuClass);
-        if (navClass) {
-            document.body.classList.add('header-nav-open')
-        } else {
-            document.body.classList.remove('header-nav-open');
-        }
-    };
+  const toggleMenu = () => {
+    menuClass = !menuClass;
+    navClass = !navClass;
+    setNavClass(navClass);
+    setMenuClass(menuClass);
+    if (navClass) {
+      document.body.classList.add('header-nav-open');
+    } else {
+      document.body.classList.remove('header-nav-open');
+    }
+  };
 
   return (
     <>
       <div className="header-nav-wrapper">
         <div className="header-bar"></div>
         <div className="header-navbar">
-                  <div className="header-image">
-                      <img src={logo} alt=""></img>
+          <div className="header-image">
+            <img src={logo} alt=""></img>
           </div>
           <div className={`${menuClass ? 'header-menu-toggle is-active' : 'header-menu-toggle'}`} id="header-mobile-menu" onClick={() => toggleMenu()}>
             <span className="bar"></span>
@@ -67,9 +66,7 @@ const Header = () => {
                   <i className={data.iconClass}></i>
                 </span>
                 &nbsp;
-                <span className="header-list-name">
-                  {data.name}
-                </span>
+                <span className="header-list-name">{data.name}</span>
               </li>
             ))}
             <input className="search-input" type="text" placeholder="Search for a movie"></input>
@@ -78,6 +75,6 @@ const Header = () => {
       </div>
     </>
   );
-}
+};
 
 export default Header;
