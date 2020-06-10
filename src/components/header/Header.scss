@@ -50,6 +50,7 @@
 
   .active-item {
     color: #3498db;
+
   }
 }
 
@@ -60,8 +61,11 @@
   transition: color 0.3s ease-out;
 }
 
-.header-nav-item a:hover {
-  color: #3498db;
+.header-nav-item:hover {
+  color: #4AA1F3;
+transform: translateY(1px) scale(1.1);
+cursor: default;
+
 }
 
 .header-menu-toggle .bar {
