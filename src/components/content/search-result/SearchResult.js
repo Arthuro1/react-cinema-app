@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
@@ -25,21 +25,23 @@ const SearchResult = (props) => {
       </div>
       <div className="grid">
         {movieData.map((movie, i) => (
-          <div key={uuidv4()}>
-            <LazyImage className="grid-cell" src={`${IMAGE_URL}${movie.poster_path}`} alt="placeholder">
-              <div className="grid-read-more">
-                <button className="grid-cell-button">Read More</button>
-              </div>
-              <div className="grid-detail">
-                <span className="grid-detail-title">{movie.title}</span>
-                <div className="grid-detail-rating">
-                  <Rating rating={movie.vote_average} totalStars={10} />
-                  &nbsp;&nbsp;
-                  <div className="grid-vote-average">{movie.vote_average}</div>
+          <Fragment key={uuidv4()}>
+            {movie.poster_path && (
+              <LazyImage className="grid-cell" src={`${IMAGE_URL}${movie.poster_path}`} alt="placeholder">
+                <div className="grid-read-more">
+                  <button className="grid-cell-button">Read More</button>
                 </div>
-              </div>
-            </LazyImage>
-          </div>
+                <div className="grid-detail">
+                  <span className="grid-detail-title">{movie.title}</span>
+                  <div className="grid-detail-rating">
+                    <Rating rating={movie.vote_average} totalStars={10} />
+                    &nbsp;&nbsp;
+                    <div className="grid-vote-average">{movie.vote_average}</div>
+                  </div>
+                </div>
+              </LazyImage>
+            )}
+          </Fragment>
         ))}
       </div>
     </div>
@@ -48,7 +50,7 @@ const SearchResult = (props) => {
 
 SearchResult.propTypes = {
   searchQuery: PropTypes.string,
-  searchResult: PropTypes.any
+  searchResult: PropTypes.array
 };
 const mapStateToProps = (state) => ({
   searchResult: state.movies.searchResult,
