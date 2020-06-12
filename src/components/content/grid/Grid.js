@@ -50,7 +50,8 @@ const Grid = (props) => {
 };
 
 Grid.propTypes = {
-  list: PropTypes.array
+  list: PropTypes.array,
+  getMovieDetails: PropTypes.func
 };
 const mapStateToProps = (state) => ({
   list: state.movies.list
