@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
+import { IMAGE_URL } from '../../../../services/movieService';
 import './Overview.scss';
 
-const Overview = () => {
+const Overview = (props) => {
+  const { movie } = props;
   const [items, setItems] = useState([]);
+  const [details] = useState(movie[0]);
+  const [credits] = useState(movie[1]);
 
   useEffect(() => {
     const detailItems = [
@@ -15,27 +21,27 @@ const Overview = () => {
       {
         id: 1,
         name: 'Budget',
-        value: `${numberFormatter(356000000, 1)}`
+        value: `${numberFormatter(details.budget, 1)}`
       },
       {
         id: 2,
         name: 'Revenue',
-        value: `${numberFormatter(28000000000, 1)}`
+        value: `${numberFormatter(details.revenue, 1)}`
       },
       {
         id: 3,
         name: 'Status',
-        value: 'Released'
+        value: `${details.status}`
       },
       {
         id: 4,
         name: 'Release Date',
-        value: '2019-04-24'
+        value: `${details.release_date}`
       },
       {
         id: 5,
         name: 'Run Time',
-        value: '181 min'
+        value: `${details.runtime}`
       }
     ];
     setItems(detailItems);
@@ -64,19 +70,21 @@ const Overview = () => {
   return (
     <div className="overview">
       <div className="overview-column-1">
-        <div className="description">This is a description about the movie</div>
+        <div className="description">{details.overview}</div>
 
         <div className="cast">
           <div className="div-title">Cast</div>
           <table>
             <tbody>
-              <tr>
-                <td>
-                  <img src="http://placehold.it/54x81" alt="" />
-                </td>
-                <td>Robert Downing Jr.</td>
-                <td>Iron Man</td>
-              </tr>
+              {credits.cast.map((actor) => (
+                <tr key={actor.cast_id}>
+                  <td>
+                    <img src={`${IMAGE_URL}${actor.profile_path}`} alt="" />
+                  </td>
+                  <td>{actor.name}</td>
+                  <td>{actor.character}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -84,15 +92,21 @@ const Overview = () => {
       <div className="overview-column-2">
         <div className="overview-detail">
           <h6>Production Companies</h6>
-          <div className="product-company">
-            <img src="http://placehold.it/30x30" alt="" />
-            <span>Marvel</span>
-          </div>
+          {details.production_companies.map((company) => (
+            <div key={company.id} className="product-company">
+              <img src={`${IMAGE_URL}${company.logo_path}`} alt="" />
+              <span>{company.name}</span>
+            </div>
+          ))}
         </div>
         <div className="overview-detail">
           <h6>Language(s)</h6>
           <p>
-            <a href="!#">English</a>
+            {details.spoken_languages.map((language, i) => (
+              <a href="!#" key={i}>
+                {language.name}
+              </a>
+            ))}
           </p>
         </div>
         {items.map((data) => (
@@ -108,4 +122,12 @@ const Overview = () => {
   );
 };
 
-export default Overview;
+Overview.propTypes = {
+  movie: PropTypes.array
+};
+
+const mapStateToProps = (state) => ({
+  movie: state.movies.movie
+});
+
+export default connect(mapStateToProps, {})(Overview);

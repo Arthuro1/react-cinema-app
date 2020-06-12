@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import { IMAGE_URL } from '../../../../services/movieService';
 
 import './Crew.scss';
 
-const Crew = () => {
+const Crew = (props) => {
+  const { movie } = props;
+  const [credits] = useState(movie[1]);
+
   return (
     <>
       <div className="cast">
@@ -17,14 +24,16 @@ const Crew = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <img src="http://placehold.it/54x81" alt="" />
-              </td>
-              <td>Alan Silvestri</td>
-              <td>Sound</td>
-              <td>Original Music Composer</td>
-            </tr>
+            {credits.crew.map((member) => (
+              <tr key={member.credit_id}>
+                <td>
+                  <img src={`${IMAGE_URL}${member.profile_path}`} alt="" />
+                </td>
+                <td>{member.name}</td>
+                <td>{member.department}</td>
+                <td>{member.job}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -32,4 +41,12 @@ const Crew = () => {
   );
 };
 
-export default Crew;
+Crew.propTypes = {
+  movie: PropTypes.array
+};
+
+const mapStateToProps = (state) => ({
+  movie: state.movies.movie
+});
+
+export default connect(mapStateToProps, {})(Crew);
