@@ -101,9 +101,9 @@ const Slideshow = (props) => {
             ></div>
           )}
         </div>
+        <Indicators currentSlide={slideIndex} />
+        {showArrows ? <RenderArrow /> : null}
       </div>
-      <Indicators currentSlide={slideIndex} />
-      {showArrows ? <RenderArrow /> : null}
     </>
   );
 };
