@@ -1,18 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import './ErrorPage.scss';
 
-const ErrorPage = () => {
+const ErrorPage = ({ clearState }) => {
+  const history = useHistory();
+
+  const navigateToHomepage = () => {
+    clearState();
+    history.push('/');
+  };
+
   return (
     <div className="error-page">
       <h1 className="error-header">Oops!</h1>
       <p className="error-msg">Something went wrong.</p>
-      <Link to={'/'} className="error-link">
+      <div className="error-link" onClick={() => navigateToHomepage()}>
         <i className="icon-home"></i> Go back to home page.
-      </Link>
+      </div>
     </div>
   );
+};
+
+ErrorPage.propTypes = {
+  clearState: PropTypes.func
 };
 
 export default ErrorPage;
