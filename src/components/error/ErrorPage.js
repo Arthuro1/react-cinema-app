@@ -1,13 +1,16 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import './ErrorPage.scss';
+import { setError } from '../../redux/actions/errors';
 
-const ErrorPage = ({ clearState }) => {
+const ErrorPage = ({ clearState, setError }) => {
   const history = useHistory();
 
   const navigateToHomepage = () => {
+    setError({ message: '', statusCode: null });
     clearState();
     history.push('/');
   };
@@ -24,7 +27,8 @@ const ErrorPage = ({ clearState }) => {
 };
 
 ErrorPage.propTypes = {
-  clearState: PropTypes.func
+  clearState: PropTypes.func,
+  setError: PropTypes.func
 };
 
-export default ErrorPage;
+export default connect(null, { setError })(ErrorPage);

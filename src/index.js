@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import * as Sentry from '@sentry/browser';
 import { Provider } from 'react-redux';
 
 import store from './redux/store';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+Sentry.init({ dsn: process.env.REACT_APP_SENTRY_DSN});
 
 ReactDOM.render(
   <React.StrictMode>
