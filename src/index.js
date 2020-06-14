@@ -8,7 +8,7 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-Sentry.init({ dsn: process.env.REACT_APP_SENTRY_DSN});
+Sentry.init({ dsn: process.env.REACT_APP_SENTRY_DSN });
 
 ReactDOM.render(
   <React.StrictMode>

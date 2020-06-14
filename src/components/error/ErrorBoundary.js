@@ -9,7 +9,7 @@ class ErrorBoundary extends Component {
     super(props);
     this.state = {
       error: null,
-        errorInfo: null,
+      errorInfo: null,
       eventId: null
     };
     this.clearState = this.clearState.bind(this);
@@ -17,9 +17,7 @@ class ErrorBoundary extends Component {
 
   componentDidCatch(error, errorInfo) {
     this.setState({ error, errorInfo });
-      Sentry.withScope((scope) => [
-scope.setTag('Custom-Tag', 'ErrorBoundary')
-      ]);
+    Sentry.withScope((scope) => [scope.setTag('Custom-Tag', 'ErrorBoundary')]);
   }
 
   clearState() {
