@@ -18,11 +18,11 @@ const Grid = (props) => {
     if (personId) {
       setMovieData(person[1].cast);
     } else if (id) {
-      setMovieData(movie[6]);
+      setMovieData(movie[5].results);
     } else {
       setMovieData(list);
     }
-  }, [list, person, personId]);
+  }, [list, person, personId, movie, id]);
 
   const formatMovieTitle = (title) => {
     const titleStr = title.toLowerCase();
