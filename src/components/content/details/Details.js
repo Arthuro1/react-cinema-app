@@ -13,9 +13,10 @@ import Reviews from './reviews/Reviews';
 import { movieDetails } from '../../../redux/actions/movies';
 import { IMAGE_URL } from '../../../services/movieService';
 import Spinner from '../../spinner/Spinner';
+import { pathUrl } from '../../../redux/actions/routes';
 
 const Details = (props) => {
-  const { movieDetails, movie } = props;
+  const { movieDetails, movie, pathUrl, match } = props;
   const { id } = useParams();
   const [details, setDetails] = useState();
   const [loading, setLoading] = useState(false);
@@ -29,6 +30,7 @@ const Details = (props) => {
   }, []);
 
   useEffect(() => {
+    pathUrl(match.path, match.url);
     if (movie.length === 0) {
       movieDetails(id);
     }
@@ -64,7 +66,7 @@ const Details = (props) => {
                   <div className="rating">
                     <Rating className="rating-stars" rating={details.vote_average} totalStars={10} />
                     &nbsp;
-                    <span>{details.vote_average}</span> <p>({details.vote_count}) reviews</p>
+                    <span>{details.vote_average}</span> <p>({details.vote_count}) votes</p>
                   </div>
                   <Tabs>
                     <div label="Overview">
@@ -92,11 +94,13 @@ const Details = (props) => {
 
 Details.propTypes = {
   movieDetails: PropTypes.func,
-  movie: PropTypes.array
+  movie: PropTypes.array,
+  match: PropTypes.object,
+  pathUrl: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
   movie: state.movies.movie
 });
 
-export default connect(mapStateToProps, { movieDetails })(Details);
+export default connect(mapStateToProps, { movieDetails, pathUrl })(Details);
