@@ -5,7 +5,7 @@ import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 
 import './Header.scss';
 import logo from '../../assets/logo.svg';
-import { getMovies, clearMovieDetails, setMovieType, setResponsePageNumber, searchQuery, searchResult } from '../../redux/actions/movies';
+import { getMovies, clearPersonDetails, clearMovieDetails, setMovieType, setResponsePageNumber, searchQuery, searchResult } from '../../redux/actions/movies';
 
 const HEADER_LIST = [
   {
@@ -65,6 +65,7 @@ const Header = (props) => {
     setDisableSearch(false);
     if (location.pathname !== '/') {
       clearMovieDetails();
+      clearPersonDetails();
       history.push('/');
     }
     setType(type);
@@ -80,6 +81,7 @@ const Header = (props) => {
   const navigateToMainPage = () => {
     setDisableSearch(false);
     clearMovieDetails();
+    clearPersonDetails();
     history.push('/');
   };
 
@@ -135,6 +137,7 @@ Header.propTypes = {
   searchQuery: PropTypes.func,
   searchResult: PropTypes.func,
   clearMovieDetails: PropTypes.func,
+  clearPersonDetails: PropTypes.func,
   list: PropTypes.array,
   page: PropTypes.number,
   totalPages: PropTypes.number
@@ -145,4 +148,4 @@ const mapStateToProps = (state) => ({
   totalPages: state.movies.totalPages
 });
 
-export default connect(mapStateToProps, { clearMovieDetails, getMovies, setMovieType, setResponsePageNumber, searchResult, searchQuery })(Header);
+export default connect(mapStateToProps, { clearPersonDetails, clearMovieDetails, getMovies, setMovieType, setResponsePageNumber, searchResult, searchQuery })(Header);

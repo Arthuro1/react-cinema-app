@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { IMAGE_URL } from '../../../../services/movieService';
+import { clearPersonDetails, clearMovieDetails } from '../../../../redux/actions/movies';
 import './Overview.scss';
 
 const Overview = (props) => {
-  const { movie } = props;
+  const { movie, clearPersonDetails, clearMovieDetails } = props;
   const [items, setItems] = useState([]);
   const [details] = useState(movie[0]);
   const [credits] = useState(movie[1]);
-
+  const history = useHistory();
   useEffect(() => {
     const detailItems = [
       {
         id: 0,
         name: 'Tagline',
-        value: 'Part of the journey is the end'
+        value: `${details.tagline}`
       },
       {
         id: 1,
@@ -48,6 +50,12 @@ const Overview = (props) => {
 
     // eslint-disable-next-line
   }, []);
+
+  const navigateToPersonDetails = (id) => {
+    clearPersonDetails();
+    clearMovieDetails();
+    history.push(`/${id}/details`);
+  };
 
   const numberFormatter = (number, digits) => {
     const symbolArray = [
@@ -81,7 +89,10 @@ const Overview = (props) => {
                   <td>
                     <img src={`${IMAGE_URL}${actor.profile_path}`} alt="" />
                   </td>
-                  <td>{actor.name}</td>
+                  <td>
+                    <div onClick={() => navigateToPersonDetails(`${actor.id}`)}>{actor.name}</div>
+                  </td>
+
                   <td>{actor.character}</td>
                 </tr>
               ))}
@@ -123,11 +134,13 @@ const Overview = (props) => {
 };
 
 Overview.propTypes = {
-  movie: PropTypes.array
+  movie: PropTypes.array,
+  clearPersonDetails: PropTypes.func,
+  clearMovieDetails: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
   movie: state.movies.movie
 });
 
-export default connect(mapStateToProps, {})(Overview);
+export default connect(mapStateToProps, { clearPersonDetails, clearMovieDetails })(Overview);
