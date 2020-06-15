@@ -75,8 +75,10 @@ const Header = (props) => {
     if (path && !errors.message && !errors.statusCode) {
       getMovies(type, page);
       setResponsePageNumber(page, totalPages);
+      console.log(location.pathname);
       if (detailsRoute || location.pathname === '/') {
         setHideHeader(true);
+        clearMovieDetails();
       }
       if (location.pathname !== '/' && location.key) {
         setDisableSearch(true);
