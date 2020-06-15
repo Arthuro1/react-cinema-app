@@ -18,7 +18,7 @@
 
 .header-navbar {
   display: grid;
-  grid-template: "link . . menu search";
+  grid-template: 'link . . menu search';
   grid-template-columns: max-content 1fr 1fr max-content max-content;
   height: 50px;
   line-height: 50px;
@@ -50,7 +50,6 @@
 
   .active-item {
     color: #3498db;
-
   }
 }
 
@@ -62,10 +61,9 @@
 }
 
 .header-nav-item:hover {
-  color: #4AA1F3;
-transform: translateY(1px) scale(1.1);
-cursor: default;
-
+  color: #4aa1f3;
+  transform: translateY(1px) scale(1.1);
+  cursor: default;
 }
 
 .header-menu-toggle .bar {
