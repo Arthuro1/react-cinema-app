@@ -1,37 +1,43 @@
-.error-page{
-    display: grid;
+.error-page {
+  display: grid;
+  color: white;
+  font-size: 100%;
+  line-height: 1.5;
+  height: 100%;
+
+  #outer {
+    width: 100%;
+    text-align: center;
+  }
+  .error-link {
+    margin: auto;
+    margin-right: 1.5em;
+    font-weight: 300;
     color: white;
-    font-size: 100%;
-    line-height: 1.5;
-    height: 100%;
+    font-size: 1.2rem;
+    border: 1px solid #efefef;
+    padding: 0.5em;
+    border-radius: 3px;
+    text-align: center;
+    text-decoration: none !important;
+    cursor: pointer;
+    display: inline-block;
 
-    .error-link{
-        margin: auto;
-        font-weight: 300;
-        color: white;
-        font-size: 1.2rem;
-        border: 1px solid #efefef;
-        padding: 0.5em;
-        border-radius: 3px;
-        text-align: center;
-        text-decoration: none !important;
-        cursor: pointer;
-
-        .error-link:hover{
-            color: white;
-        }
+    .error-link:hover {
+      color: white;
     }
+  }
 
-    .error-msg{
-            font-size: 2em;
-            text-align: center;
-            font-weight: 100;
-            margin-bottom: 10rem;
-        }
+  .error-msg {
+    font-size: 2em;
+    text-align: center;
+    font-weight: 100;
+    margin-bottom: 10rem;
+  }
 
-        .error-header{
-            text-align: center;
-            font-size: 15em;
-            font-weight: 100;
-        }
+  .error-header {
+    text-align: center;
+    font-size: 15em;
+    font-weight: 100;
+  }
 }

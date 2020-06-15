@@ -32,7 +32,7 @@ class ErrorBoundary extends Component {
 
   render() {
     if (this.state.error) {
-      return <ErrorPage clearState={this.clearState} />;
+      return <ErrorPage eventId={this.state.eventId} clearState={this.clearState} />;
     }
     return this.props.children;
   }
