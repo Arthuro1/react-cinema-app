@@ -17,18 +17,8 @@ export const SEARCH_API_URL = async (query) => {
   return response;
 };
 
-export const MOVIE_RECOMMANDATIONS_URL = async (id) => {
-  const response = await axios.get(`${REQUEST_URL}/movie/${id}/recommendations?api_key=${API_KEY}&language=${LANGUAGE}&page=1`);
-  return response;
-};
-
 export const MOVIE_DETAILS_URL = async (id) => {
   const response = await axios.get(`${REQUEST_URL}/movie/${id}?api_key=${API_KEY}&language=${LANGUAGE}`);
-  return response;
-};
-
-export const PERSON_DETAILS_URL = async (id) => {
-  const response = await axios.get(`${REQUEST_URL}/person/${id}?api_key=${API_KEY}&language=${LANGUAGE}`);
   return response;
 };
 
@@ -36,18 +26,9 @@ export const MOVIE_CREDITS_URL = async (id) => {
   const response = await axios.get(`${REQUEST_URL}/movie/${id}/credits?api_key=${API_KEY}&language=${LANGUAGE}`);
   return response;
 };
-export const PERSON_MOVIE_CREDITS_URL = async (id) => {
-  const response = await axios.get(`${REQUEST_URL}/person/${id}/movie_credits?api_key=${API_KEY}&language=${LANGUAGE}`);
-  return response;
-};
 
 export const MOVIE_IMAGES_URL = async (id) => {
   const response = await axios.get(`${REQUEST_URL}/movie/${id}/images?api_key=${API_KEY}&language=${LANGUAGE}&include_image_language=en`);
-  return response;
-};
-
-export const PERSON_IMAGES_URL = async (id) => {
-  const response = await axios.get(`${REQUEST_URL}/person/${id}/images?api_key=${API_KEY}`);
   return response;
 };
 

@@ -6,7 +6,6 @@ import './Rating.scss';
 const Rating = ({ rating, totalStars, className }) => {
   const [numberOfStars, setNumberOfStars] = useState();
   const ratingRef = useRef();
-
   useEffect(() => {
     setNumberOfStars([...Array(totalStars).keys()].map((i) => i + 1));
     let percentage;

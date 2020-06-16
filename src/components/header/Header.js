@@ -7,7 +7,7 @@ import './Header.scss';
 import logo from '../../assets/logo.svg';
 import { pathUrl } from '../../redux/actions/routes';
 import { setError } from '../../redux/actions/errors';
-import { getMovies, clearMovieDetails, setMovieType, setResponsePageNumber, searchQuery, searchResult, clearPersonDetails } from '../../redux/actions/movies';
+import { getMovies, clearMovieDetails, setMovieType, setResponsePageNumber, searchQuery, searchResult } from '../../redux/actions/movies';
 
 const HEADER_LIST = [
   {
@@ -75,7 +75,7 @@ const Header = (props) => {
     if (path && !errors.message && !errors.statusCode) {
       getMovies(type, page);
       setResponsePageNumber(page, totalPages);
-      
+      console.log(location.pathname);
       if (detailsRoute || location.pathname === '/') {
         setHideHeader(true);
         clearMovieDetails();
@@ -92,7 +92,6 @@ const Header = (props) => {
     setDisableSearch(false);
     if (location.pathname !== '/') {
       clearMovieDetails();
-      clearPersonDetails();
       history.push('/');
     }
     setType(type);
@@ -108,7 +107,6 @@ const Header = (props) => {
   const navigateToMainPage = () => {
     setDisableSearch(false);
     clearMovieDetails();
-    clearPersonDetails();
     history.push('/');
   };
 
@@ -164,7 +162,6 @@ Header.propTypes = {
   searchQuery: PropTypes.func,
   searchResult: PropTypes.func,
   clearMovieDetails: PropTypes.func,
-  clearPersonDetails: PropTypes.func,
   list: PropTypes.array,
   page: PropTypes.number,
   totalPages: PropTypes.number,
@@ -185,4 +182,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { clearMovieDetails, getMovies, setMovieType, setResponsePageNumber, searchResult, searchQuery, pathUrl, setError, clearPersonDetails })(Header);
+export default connect(mapStateToProps, { clearMovieDetails, getMovies, setMovieType, setResponsePageNumber, searchResult, searchQuery, pathUrl, setError })(Header);

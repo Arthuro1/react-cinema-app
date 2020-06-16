@@ -1,22 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 import { IMAGE_URL } from '../../../../services/movieService';
-import { clearPersonDetails, clearMovieDetails } from '../../../../redux/actions/movies';
+
 import './Crew.scss';
 
 const Crew = (props) => {
-  const { movie, clearPersonDetails, clearMovieDetails } = props;
+  const { movie } = props;
   const [credits] = useState(movie[1]);
-  const history = useHistory();
-
-  const navigateToPersonDetails = (id) => {
-    clearPersonDetails();
-    clearMovieDetails();
-    history.push(`/${id}/details`);
-  };
 
   return (
     <>
@@ -37,9 +29,7 @@ const Crew = (props) => {
                 <td>
                   <img src={`${IMAGE_URL}${member.profile_path}`} alt="" />
                 </td>
-                <td>
-                  <div onClick={() => navigateToPersonDetails(`${member.id}`)}>{member.name}</div>
-                </td>
+                <td>{member.name}</td>
                 <td>{member.department}</td>
                 <td>{member.job}</td>
               </tr>
@@ -52,13 +42,11 @@ const Crew = (props) => {
 };
 
 Crew.propTypes = {
-  movie: PropTypes.array,
-  clearPersonDetails: PropTypes.func,
-  clearMovieDetails: PropTypes.func
+  movie: PropTypes.array
 };
 
 const mapStateToProps = (state) => ({
   movie: state.movies.movie
 });
 
-export default connect(mapStateToProps, { clearMovieDetails, clearPersonDetails })(Crew);
+export default connect(mapStateToProps, {})(Crew);

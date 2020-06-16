@@ -1,17 +1,5 @@
-import { MOVIE_LIST, SET_ERROR, RESPONSE_PAGE, LOAD_MORE_RESULTS, MOVIE_TYPE, SEARCH_QUERY, SEARCH_RESULT, MOVIE_DETAILS, CLEAR_MOVIE_DETAILS, PERSON_DETAILS, CLEAR_PERSON_DETAILS } from '../types';
-import {
-  MOVIE_API_URL,
-  SEARCH_API_URL,
-  MOVIE_DETAILS_URL,
-  MOVIE_CREDITS_URL,
-  MOVIE_IMAGES_URL,
-  MOVIE_VIDEOS_URL,
-  MOVIE_REVIEWS_URL,
-  PERSON_DETAILS_URL,
-  PERSON_IMAGES_URL,
-  PERSON_MOVIE_CREDITS_URL,
-  MOVIE_RECOMMANDATIONS_URL
-} from '../../services/movieService';
+import { MOVIE_LIST, SET_ERROR, RESPONSE_PAGE, LOAD_MORE_RESULTS, MOVIE_TYPE, SEARCH_QUERY, SEARCH_RESULT, MOVIE_DETAILS, CLEAR_MOVIE_DETAILS } from '../types';
+import { MOVIE_API_URL, SEARCH_API_URL, MOVIE_DETAILS_URL, MOVIE_CREDITS_URL, MOVIE_IMAGES_URL, MOVIE_VIDEOS_URL, MOVIE_REVIEWS_URL } from '../../services/movieService';
 
 export const getMovies = (type, pageNumber) => async (dispatch) => {
   try {
@@ -42,9 +30,8 @@ export const movieDetails = (id) => async (dispatch) => {
     const images = await MOVIE_IMAGES_URL(id);
     const videos = await MOVIE_VIDEOS_URL(id);
     const reviews = await MOVIE_REVIEWS_URL(id);
-    const movieRecommandations = MOVIE_RECOMMANDATIONS_URL(id);
 
-    const response = await Promise.all([details, credits, images, videos, reviews, movieRecommandations])
+    const response = await Promise.all([details, credits, images, videos, reviews])
       .then((values) => Promise.all(values.map((value) => value.data)))
       .then((resp) => resp);
     dispatchMethod(MOVIE_DETAILS, response, dispatch);
@@ -55,23 +42,6 @@ export const movieDetails = (id) => async (dispatch) => {
         statusCode: error.response.status
       };
       dispatchMethod(SET_ERROR, payload, dispatch);
-    }
-  }
-};
-
-export const personDetails = (id) => async (dispatch) => {
-  try {
-    const details = await PERSON_DETAILS_URL(id);
-    const credits = await PERSON_MOVIE_CREDITS_URL(id);
-    const images = await PERSON_IMAGES_URL(id);
-
-    const response = await Promise.all([details, credits, images])
-      .then((values) => Promise.all(values.map((value) => value.data)))
-      .then((resp) => resp);
-    dispatchMethod(PERSON_DETAILS, response, dispatch);
-  } catch (error) {
-    if (error.response) {
-      dispatchMethod(SET_ERROR, error.response.data.status_message, dispatch);
     }
   }
 };
@@ -94,10 +64,6 @@ export const loadMoreMovies = (type, pageNumber) => async (dispatch) => {
 
 export const clearMovieDetails = () => async (dispatch) => {
   dispatchMethod(CLEAR_MOVIE_DETAILS, [], dispatch);
-};
-
-export const clearPersonDetails = () => async (dispatch) => {
-  dispatchMethod(CLEAR_PERSON_DETAILS, [], dispatch);
 };
 
 export const setResponsePageNumber = (page, totalPages) => async (dispatch) => {
