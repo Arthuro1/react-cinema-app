@@ -9,6 +9,7 @@ import Main from './components/main/Main';
 import Details from './components/content/details/Details';
 import ErrorBoundary from './components/error/ErrorBoundary';
 import { appRoutes } from './redux/actions/routes';
+import PersonDetails from './components/content/details/crew/person-details/PersonDetails';
 
 const App = (props) => {
   const { appRoutes } = props;
@@ -22,6 +23,11 @@ const App = (props) => {
       id: 2,
       path: '/:id/:name/details',
       component: Details
+    },
+    {
+      id: 3,
+      path: '/:personId/details',
+      component: PersonDetails
     }
   ];
 

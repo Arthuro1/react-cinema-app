@@ -14,6 +14,7 @@ import { movieDetails } from '../../../redux/actions/movies';
 import { IMAGE_URL } from '../../../services/movieService';
 import Spinner from '../../spinner/Spinner';
 import { pathUrl } from '../../../redux/actions/routes';
+import Grid from '../grid/Grid';
 
 const Details = (props) => {
   const { movieDetails, movie, pathUrl, match } = props;
@@ -49,7 +50,7 @@ const Details = (props) => {
             <div className="movie-overlay"></div>
             <div className="movie-details">
               <div className="movie-image">
-                <img src={`${IMAGE_URL}${details.poster_path}`} alt="found" />
+                <img src={`${IMAGE_URL}${details.poster_path}`} alt="" />
               </div>
               <div className="movie-body">
                 <div className="movie-overview">
@@ -80,6 +81,9 @@ const Details = (props) => {
                     </div>
                     <div label="Reviews">
                       <Reviews />
+                    </div>
+                    <div label="Recommandations">
+                      <Grid />
                     </div>
                   </Tabs>
                 </div>
