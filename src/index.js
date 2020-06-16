@@ -8,7 +8,14 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-Sentry.init({ dsn: process.env.REACT_APP_SENTRY_DSN });
+if (process.env.NODE_ENV === 'production') {
+  Sentry.init({
+    dsn: process.env.REACT_APP_SENTRY_DSN,
+    beforeBreadcrumb(breadcrumb, hint) {
+      return breadcrumb.category === 'ui.click' ? null : breadcrumb;
+    }
+  });
+}
 
 ReactDOM.render(
   <React.StrictMode>

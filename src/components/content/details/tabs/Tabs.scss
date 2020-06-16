@@ -20,6 +20,7 @@
   color: #abb7c4;
   padding-bottom: 15px;
   margin-right: 50px;
+  cursor: pointer;
 }
 
 .tab-list-active {
@@ -36,6 +37,7 @@
   .tab-list-item {
     display: block;
     text-align: left;
+    cursor: pointer;
   }
 
   .tab-list-active {

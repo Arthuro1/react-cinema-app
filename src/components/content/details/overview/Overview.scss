@@ -30,7 +30,7 @@
     }
 
     td,
-    th {
+    tr {
       text-align: left;
       padding: 8px;
     }
@@ -46,6 +46,7 @@
     td:nth-child(2) {
       font-size: 16px;
       color: #4280bf;
+      div{cursor: pointer;}
     }
   }
 }
@@ -76,6 +77,7 @@
         width: auto;
         color: #4280bf;
         padding-right: 5px;
+        cursor: pointer;
       }
     }
 

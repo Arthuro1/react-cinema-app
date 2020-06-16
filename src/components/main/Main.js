@@ -26,7 +26,6 @@ function Main(props) {
 
   useEffect(() => {
     pathUrl(match.path, match.url);
-    console.log(match.path);
     setResponsePageNumber(currentPage, totalPages);
     // eslint-disable-next-line
   }, [currentPage, totalPages]);
