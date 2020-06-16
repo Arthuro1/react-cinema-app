@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import './PersonDetails.scss';
 import Tabs from '../../tabs/Tabs';
 import { personDetails } from '../../../../../redux/actions/movies';
+import { pathUrl } from '../../../../../redux/actions/routes';
 import { IMAGE_URL } from '../../../../../services/movieService';
 import Spinner from '../../../../spinner/Spinner';
 import Media from './media/Media';
@@ -15,7 +16,7 @@ import Rating from './rating/Rating';
 import Crew from './crew/Crew';
 
 const PersonDetails = (props) => {
-  const { personDetails, person } = props;
+  const { personDetails, person, pathUrl, match } = props;
   const { personId } = useParams();
   const [details, setDetails] = useState();
   const [loading, setLoading] = useState(false);
@@ -29,6 +30,7 @@ const PersonDetails = (props) => {
   }, []);
 
   useEffect(() => {
+    pathUrl(match.path, match.url);
     if (person.length === 0) {
       personDetails(personId);
     }
@@ -87,11 +89,13 @@ const PersonDetails = (props) => {
 
 PersonDetails.propTypes = {
   personDetails: PropTypes.func,
-  person: PropTypes.array
+  person: PropTypes.array,
+  pathUrl: PropTypes.func,
+  match: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({
   person: state.movies.person
 });
 
-export default connect(mapStateToProps, { personDetails })(PersonDetails);
+export default connect(mapStateToProps, { personDetails, pathUrl })(PersonDetails);

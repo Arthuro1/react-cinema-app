@@ -18,7 +18,7 @@ export const SEARCH_API_URL = async (query) => {
 };
 
 export const MOVIE_RECOMMANDATIONS_URL = async (id) => {
-  const response = await axios.get(`${REQUEST_URL}/movie/${id}/recommendations?api_key=${API_KEY}&language=${LANGUAGE}&page=1`);
+  const response = await axios.get(`${REQUEST_URL}/movie/${id}/recommendations?api_key=${API_KEY}&language=${LANGUAGE}&page=1&sort_by=popularity.desc`);
   return response;
 };
 
@@ -37,7 +37,7 @@ export const MOVIE_CREDITS_URL = async (id) => {
   return response;
 };
 export const PERSON_MOVIE_CREDITS_URL = async (id) => {
-  const response = await axios.get(`${REQUEST_URL}/person/${id}/movie_credits?api_key=${API_KEY}&language=${LANGUAGE}`);
+  const response = await axios.get(`${REQUEST_URL}/person/${id}/movie_credits?api_key=${API_KEY}&language=${LANGUAGE}&sort_by=popularity.desc`);
   return response;
 };
 

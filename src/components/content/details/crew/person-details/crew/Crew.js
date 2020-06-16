@@ -37,16 +37,16 @@ const Crew = (props) => {
             </tr>
           </thead>
           <tbody>
-            {credits.crew.map((member) => (
-              <tr key={member.credit_id}>
+            {credits.crew.map((data) => (
+              <tr key={data.credit_id}>
                 <td>
-                  <img src={`${IMAGE_URL}${member.poster_path}`} alt="" />
+                  <img src={`${IMAGE_URL}${data.poster_path}`} alt="" />
                 </td>
                 <td>
-                  <div onClick={() => navigateToMovieDetails(`${member.id}`, `${member.title}`)}>{member.title}</div>
+                  <div onClick={() => navigateToMovieDetails(`${data.id}`, `${data.title}`)}>{data.title}</div>
                 </td>
-                <td>{member.department}</td>
-                <td>{member.job}</td>
+                <td>{data.department}</td>
+                <td>{data.job}</td>
               </tr>
             ))}
           </tbody>
