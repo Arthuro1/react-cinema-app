@@ -25,8 +25,10 @@ const Grid = (props) => {
   }, [list, person, personId, movie, id]);
 
   const formatMovieTitle = (title) => {
-    const titleStr = title.toLowerCase();
-    return titleStr.replace(/ /g, '-');
+    const titleStr = title.replace(/%/g, ' per cent').toLowerCase();
+    const cleanedStr = titleStr.replace(/ /g, '-');
+
+    return cleanedStr;
   };
 
   return (

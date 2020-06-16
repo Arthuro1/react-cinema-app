@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@sentry/browser": "^5.17.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -21,10 +22,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint": "eslint \"src/**/*.js*\"",
+    "lint": "eslint \"src/**/*.{js, scss, css, json, jsx}\"",
     "lint:fix": "eslint --fix",
-    "prettier:check": "prettier --check \"src/**/*.{js,jsx,json}\"",
-    "prettier:write": "prettier --write \"src/**/*.{js,jsx,json}\"",
+    "prettier:check": "prettier --check \"src/**/*.{js, jsx, scss, css, json}\"",
+    "prettier:write": "prettier --write \"src/**/*.{js, jsx, scss, css, json}\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
