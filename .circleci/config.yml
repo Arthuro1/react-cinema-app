@@ -90,13 +90,14 @@ jobs:
       - run:
           name: Run unit tests
           command: npm run test
+
   publish-to-docker-hub:
     executor: docker-publisher
     steps:
       - checkout
       - setup_remote_docker
       - *restore-cache
-      - run: docker login -u "${DOCKER_HUB_USER}" -p "${DOCKER_HUB_PASSWORD}"
+      - run: docker login -u "${DOCKER_HUB_USER}" --password-stdin "${DOCKER_HUB_PASSWORD}"
       - run: docker build -t ${IMAGE_NAME}:latest .
       - run:
           name: Tag and push to docker hub
@@ -157,7 +158,7 @@ jobs:
     steps:
       - slack/notify:
           color: '#42e2f4'
-          message: "${CIRCLE_BRANCH} branch deployment to aws s3 and cloudfront is complete"
+          message: "${CIRCLE_BRANCH} branch deployment to dockerhub, aws s3 and cloudfront is complete"
           webhook: ${CIRCLECI_SLACK_WEBHOOK}
       - slack/status:
           webhook: ${CIRCLECI_SLACK_WEBHOOK}
