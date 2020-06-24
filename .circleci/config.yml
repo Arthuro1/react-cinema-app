@@ -196,18 +196,9 @@ workflows:
                 - develop
                 - staging
                 - master
-      - publish-to-docker-hub:
-          requires:
-            - unit-test
-          filters:
-            branches:
-              only:
-                - develop
-                - staging
-                - master
       - deploy-to-aws-s3:
           requires:
-            - publish-to-docker-hub
+            - unit-test
           filters:
             branches:
               only:
@@ -223,9 +214,18 @@ workflows:
                 - develop
                 - staging
                 - master
-      - notify-via-slack:
+      - publish-to-docker-hub:
           requires:
             - deploy-to-aws-cloudfront
+          filters:
+            branches:
+              only:
+                - develop
+                - staging
+                - master
+      - notify-via-slack:
+          requires:
+            - publish-to-docker-hub
           filters:
             branches:
               only:
