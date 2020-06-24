@@ -114,7 +114,7 @@ const Overview = (props) => {
           <h6>Language(s)</h6>
           <p>
             {details.spoken_languages.map((language, i) => (
-              <a href="" key={i}>
+              <a href="#!" key={i}>
                 {language.name}
               </a>
             ))}
@@ -124,7 +124,7 @@ const Overview = (props) => {
           <div className="overview-detail" key={data.id}>
             <h6>{data.name}</h6>
             <p>
-              <a href="">{data.value}</a>
+              <a href="#!">{data.value}</a>
             </p>
           </div>
         ))}
